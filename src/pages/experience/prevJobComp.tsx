@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 type jobComp = {
   year: string;
   role: string;
@@ -9,13 +11,20 @@ type jobComp = {
 const PrevJobComp = ({ year, role, about, skills, company }: jobComp) => {
   const generateSkill = (skill: string) => {
     return (
-      <div className="bg-purple-800 text-purple-100 p-1 rounded-4xl px-4 capitalize tracking-wide">
+      <motion.p
+        key={skill}
+        className="bg-purple-800 text-purple-100 p-1 rounded-4xl px-4 capitalize tracking-wide"
+        whileHover={{
+          scale: 1.1,
+        }}
+        whileTap={{ scale: 0.95 }}
+      >
         {skill}
-      </div>
+      </motion.p>
     );
   };
   return (
-    <div className="flex pt-6">
+    <div className="flex flex-col md:flex-row pt-6">
       <div className="flex-2">{year}</div>
       <div className="flex-6">
         <div className="flex flex-col gap-4">
@@ -28,9 +37,9 @@ const PrevJobComp = ({ year, role, about, skills, company }: jobComp) => {
             </h5>
           </div>
           <p>{about}</p>
-          <p className="flex gap-4 flex-wrap">
+          <div className="flex gap-4 flex-wrap">
             {skills.map((it) => generateSkill(it))}
-          </p>
+          </div>
         </div>
       </div>
     </div>
